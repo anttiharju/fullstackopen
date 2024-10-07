@@ -10,16 +10,22 @@ const Statistics = (props) => {
   const good = props.good
   const neutral = props.neutral
   const bad = props.bad
-  return (
-    <>
+
+  if (good === 0 && neutral === 0 && bad === 0) {
+    return (
       <p>
-        good {good} <br />
-        neutral {neutral} <br />
-        bad {bad} <br />
-        average {(good - bad) / (good + neutral + bad) || 0} <br />
-        positive {good / (good + neutral + bad) * 100 || 0} %
+        No feedback is given
       </p>
-    </>
+    )
+  }
+  return (
+    <p>
+      good {good} <br />
+      neutral {neutral} <br />
+      bad {bad} <br />
+      average {(good - bad) / (good + neutral + bad) || 0} <br />
+      positive {good / (good + neutral + bad) * 100 || 0} %
+    </p>
   )
 }
 
