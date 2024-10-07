@@ -9,7 +9,9 @@ const App = () => {
 
   return (
     <div>
+      {/*<Header course={course} />*/}
       <h1>{course}</h1>
+      {/*<Content ... />*/}
       <p>
         {part1} {exercises1}
       </p>
@@ -19,6 +21,7 @@ const App = () => {
       <p>
         {part3} {exercises3}
       </p>
+      {/* <Total ... /> */}
       <p>Number of exercises {exercises1 + exercises2 + exercises3}</p>
     </div>
   )
