@@ -1,7 +1,7 @@
 {
-	"recommendations": [
-		"bierner.markdown-mermaid",
-		"dbaeumer.vscode-eslint",
-		"EditorConfig.EditorConfig",
-	]
+  "recommendations": [
+    "bierner.markdown-mermaid",
+    "dbaeumer.vscode-eslint",
+    "EditorConfig.EditorConfig",
+  ]
 }
