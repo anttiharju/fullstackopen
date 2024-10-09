@@ -1,6 +1,4 @@
-const App = (props) => {
-  const { notes } = props
-
+const App = ({ notes }) => {
   return (
     <div>
       <h1>Notes</h1>
