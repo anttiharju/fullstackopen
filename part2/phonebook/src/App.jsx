@@ -25,7 +25,6 @@ const App = () => {
     <div>
       <h2>Phonebook</h2>
       <form onSubmit={addPerson}>
-        <div>debug: {newName}</div>
         <div>
           name: <input value={newName} onChange={handlePhonebookChange}
           />
@@ -35,7 +34,9 @@ const App = () => {
         </div>
       </form>
       <h2>Numbers</h2>
-      ...
+        {persons.map(note =>
+          <li key={note.name}>{note.name}</li>
+        )}
     </div>
   )
 }
