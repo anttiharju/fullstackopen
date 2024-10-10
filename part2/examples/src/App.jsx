@@ -18,6 +18,17 @@ const App = () => {
   }, [])
   console.log('render', notes.length, 'notes')
 
+  const toggleImportanceOf = id => {
+    const note = notes.find(n => n.id === id)
+    const changedNote = { ...note, important: !note.important }
+
+    noteService
+      .update(id, changedNote)
+      .then(response => {
+        setNotes(notes.map(note => note.id !== id ? note : response.data))
+      })
+  }
+
   const addNote = event => {
     event.preventDefault()
     const noteObject = {
@@ -31,17 +42,6 @@ const App = () => {
       setNotes(notes.concat(response.data))
       setNewNote('')
     })
-  }
-
-  const toggleImportanceOf = id => {
-    const note = notes.find(n => n.id === id)
-    const changedNote = { ...note, important: !note.important }
-
-    noteService
-      .update(id, changedNote)
-      .then(response => {
-        setNotes(notes.map(note => note.id !== id ? note : response.data))
-      })
   }
 
   const handleNoteChange = (event) => {
