@@ -9,11 +9,13 @@ const Persons = ({ persons, filter, setPersons }) => {
     : persons.filter(nameFilter)
 
   const destroy = id => {
-    personService
+    if (window.confirm("Do you really want to delete this person?")) {
+      personService
       .destroy(id)
       .then(() => {
         setPersons(persons.filter(p => p.id !== id))
       })
+    }
   }
 
   return (
