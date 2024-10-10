@@ -1,8 +1,7 @@
 const Person = ({ name, number, destroy }) => {
   return (
     <li>
-      {name} {number}
-      <button onClick={destroy}>delete</button>
+      {name} {number} <button onClick={destroy}>delete</button>
     </li>
   )
 }

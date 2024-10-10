@@ -9,16 +9,17 @@ const Persons = ({ persons, filter, setPersons }) => {
     : persons.filter(nameFilter)
 
   const destroy = id => {
-    if (window.confirm("Do you really want to delete this person?")) {
+    const person = persons.find(p => p.id === id)
+
+    if (window.confirm(`Delete ${person.name} ?`)) {
       personService
       .destroy(id)
       .then(() => {
         setPersons(persons.filter(p => p.id !== id))
       })
       .catch(error => {
-        const person = persons.find(p => p.id === id)
         alert(
-          `the person '${person.name}' with number '${person.number}' was already deleted from server.`
+          `the person '${person.name}' was already deleted from server.`
         )
         setPersons(persons.filter(p => p.id !== id))
       })
