@@ -15,6 +15,13 @@ const Persons = ({ persons, filter, setPersons }) => {
       .then(() => {
         setPersons(persons.filter(p => p.id !== id))
       })
+      .catch(error => {
+        const person = persons.find(p => p.id === id)
+        alert(
+          `the person '${person.name}' with number '${person.number}' was already deleted from server.`
+        )
+        setPersons(persons.filter(p => p.id !== id))
+      })
     }
   }
 
