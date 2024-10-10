@@ -29,7 +29,7 @@ const App = () => {
 
       <h3>Numbers</h3>
 
-      <Persons persons={persons} filter={filter} />
+      <Persons filter={filter} persons={persons} setPersons={setPersons} />
     </div>
   )
 }
