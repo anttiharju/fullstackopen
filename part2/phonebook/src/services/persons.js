@@ -3,12 +3,7 @@ const baseUrl = 'http://localhost:3001/persons'
 
 const getAll = () => {
   const request = axios.get(baseUrl)
-  const nonExisting = {
-    name: 'This person is not saved to server',
-    number: '404',
-    id: 10000,
-  }
-  return request.then(response => response.data.concat(nonExisting))
+  return request.then(response => response.data)
 }
 
 const create = newObject => {
