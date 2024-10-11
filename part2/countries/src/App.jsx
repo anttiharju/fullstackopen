@@ -10,7 +10,6 @@ const App = () => {
 
   useEffect(() => {
     if (filter !== '') {
-      console.log('fetching country info...')
       axios
         .get(`https://studies.cs.helsinki.fi/restcountries/api/all`)
         .then(response => {
