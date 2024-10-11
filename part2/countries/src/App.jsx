@@ -21,11 +21,11 @@ const App = () => {
   }, [country])
 
   return (
-    <div>
+    <>
       <CountryForm input={input} setInput={setInput} setCountry={setCountry} />
 
       <CountryList countries={countries} />
-    </div>
+    </>
   )
 }
 
