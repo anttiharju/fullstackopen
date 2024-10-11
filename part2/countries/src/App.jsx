@@ -23,7 +23,7 @@ const App = () => {
     <>
       <CountryForm filter={filter} setFilter={setFilter} />
 
-      <CountryList countries={countries} />
+      <CountryList countries={countries} filter={filter} />
     </>
   )
 }
