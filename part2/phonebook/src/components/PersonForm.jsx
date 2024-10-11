@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import personService from '../services/persons'
 
-const PersonForm = ({persons, setPersons}) => {
+const PersonForm = ({persons, setPersons, setToast}) => {
   const [newName, setNewName] = useState('')
   const handleNameInput = (event) => {
     setNewName(event.target.value)
@@ -52,6 +52,13 @@ const PersonForm = ({persons, setPersons}) => {
         setNewName('')
         setNewNumber('')
       })
+
+    setToast(
+      `Added ${newName}`
+    )
+    setTimeout(() => {
+      setToast(null)
+    }, 5000)
   }
 
   return (
