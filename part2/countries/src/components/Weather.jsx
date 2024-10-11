@@ -16,22 +16,15 @@ const Weather = ({capital}) => {
   }, [weatherUrl])
 
   if (weather){
-    console.log('temperature:', weather.main.temp)
-    console.log('id:', weather.weather[0].id)
-    console.log('icon:', weather.weather[0].icon)
-    console.log('description:', weather.weather[0].description)
-    console.log('wind:', weather.wind.speed)
-
-    const temperature = 0
-    const icon = '02n'
-    const description = 'few clouds'
-    const wind = 0
-
+    const temp = weather.main.temp
+    const icon = weather.weather[0].icon
+    const desc = weather.weather[0].description
+    const wind = weather.wind.speed
     return (
       <>
         <h2>Weather in {capital}</h2>
-        <div>temperature {temperature} Celsius</div>
-        <img src={`https://openweathermap.org/img/wn/${icon}@2x.png`} alt={`${capital} currently has ${description}`} />
+        <div>temperature {temp} Celsius</div>
+        <img src={`https://openweathermap.org/img/wn/${icon}@2x.png`} alt={`${capital} has ${desc}`} />
         <div>wind {wind} m/s</div>
       </>
     )
