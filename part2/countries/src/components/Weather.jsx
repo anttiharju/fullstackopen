@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 
 const Weather = ({capital}) => {
-  const key = import.meta.env.VITE_OPEN_WEATHER
-  const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${capital}&units=metric&appid=${key}`
   const [weather, setWeather] = useState(null)
 
+  const key = import.meta.env.VITE_OPEN_WEATHER
+  const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${capital}&units=metric&appid=${key}`
   useEffect(() => {
     console.log('fetching weather data')
     axios
