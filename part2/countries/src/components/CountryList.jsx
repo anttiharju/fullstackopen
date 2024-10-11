@@ -4,9 +4,9 @@ const CountryList = ({countries, filter}) => {
 
   if (filteredCountries.length > 10) {
     return (
-      <p>
+      <div>
         Too many matches, specify another filter
-      </p>
+      </div>
     )
   }
 
