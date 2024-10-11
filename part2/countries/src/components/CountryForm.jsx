@@ -1,12 +1,12 @@
-const CountryForm = ({input, setInput}) => {
+const CountryForm = ({filter, setFilter}) => {
 
   const handleChange = (event) => {
-    setInput(event.target.value)
+    setFilter(event.target.value)
   }
 
   return (
     <>
-      find countries <input value={input} onChange={handleChange} />
+      find countries <input value={filter} onChange={handleChange} />
     </>
   )
 }
