@@ -5,7 +5,7 @@ import Search from './components/Search'
 import Results from './components/Results'
 
 const App = () => {
-  const [filter, setFilter] = useState('Finland')
+  const [filter, setFilter] = useState('')
   const [countries, setCountries] = useState([])
 
   useEffect(() => {
