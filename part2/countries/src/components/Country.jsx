@@ -1,17 +1,28 @@
+import { useState, useEffect } from 'react'
+import axios from 'axios'
+
 const Country = ({country}) => {
   const apiKey = import.meta.env.VITE_OPEN_WEATHER
   const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${country.capital}&units=metric&appid=${apiKey}`
-  console.log('fetching weather info...')
-  fetch(weatherUrl)
-    .then(response => response.json())
-    .then(data => {
-      console.log('temperature:', data.main.temp)
-      console.log('id:', data.weather[0].id)
-      console.log('icon:', data.weather[0].icon)
-      console.log('description:', data.weather[0].description)
-      console.log('wind:', data.wind.speed)
-    }
-  )
+  const [weather, setWeather] = useState(null)
+
+  useEffect(() => {
+    console.log('fetching weather data')
+    axios
+      .get(weatherUrl)
+      .then(response => {
+        setWeather(response.data)
+      })
+  }, [weatherUrl])
+
+  if (weather){
+    console.log('temperature:', weather.main.temp)
+    console.log('id:', weather.weather[0].id)
+    console.log('icon:', weather.weather[0].icon)
+    console.log('description:', weather.weather[0].description)
+    console.log('wind:', weather.wind.speed)
+  }
+
   const temperature = 0
   const icon = '02n'
   const description = 'few clouds'
