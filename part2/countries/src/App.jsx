@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 
 import CountryForm from './components/CountryForm'
+import CountryList from './components/CountryList'
 
 const App = () => {
   const [input, setInput] = useState('')
@@ -22,9 +23,8 @@ const App = () => {
   return (
     <div>
       <CountryForm input={input} setInput={setInput} setCountry={setCountry} />
-      {countries.map(country => (
-        <div key={country.name.common}>{country.name.common}</div>
-      ))}
+
+      <CountryList countries={countries} />
     </div>
   )
 }
