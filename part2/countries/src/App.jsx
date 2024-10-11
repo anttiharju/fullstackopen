@@ -5,6 +5,8 @@ import CountryForm from './components/CountryForm'
 import CountryInfo from './components/CountryInfo'
 
 const App = () => {
+  const api_key = import.meta.env.VITE_OPEN_WEATHER
+  console.log(api_key)
   const [filter, setFilter] = useState('')
   const [countries, setCountries] = useState([])
 
