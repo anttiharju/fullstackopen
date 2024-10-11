@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
-const Weather = ({country}) => {
+const Weather = ({capital}) => {
   const key = import.meta.env.VITE_OPEN_WEATHER
-  const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${country.capital}&units=metric&appid=${key}`
+  const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${capital}&units=metric&appid=${key}`
   const [weather, setWeather] = useState(null)
 
   useEffect(() => {
@@ -29,9 +29,9 @@ const Weather = ({country}) => {
 
     return (
       <>
-        <h2>Weather in {country.capital}</h2>
+        <h2>Weather in {capital}</h2>
         <div>temperature {temperature} Celsius</div>
-        <img src={`https://openweathermap.org/img/wn/${icon}@2x.png`} alt={`${country.capital} currently has ${description}`} />
+        <img src={`https://openweathermap.org/img/wn/${icon}@2x.png`} alt={`${capital} currently has ${description}`} />
         <div>wind {wind} m/s</div>
       </>
     )
