@@ -22,7 +22,7 @@ const Weather = ({capital}) => {
   }, [weatherUrl])
 
   if (!weather) {
-    return (<></>)
+    return null
   }
 
   const temp = weather.main.temp
