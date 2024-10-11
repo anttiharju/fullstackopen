@@ -14,15 +14,30 @@ const PersonForm = ({persons, setPersons}) => {
 
   const addPerson = (event) => {
     event.preventDefault()
-    const isDuplicateName = (x) => x.name === newName;
-    if (persons.some(isDuplicateName)) {
-      alert(`${newName} is already added to phonebook`)
-      return
-    }
-    const isDuplicateNumber = (x) => x.number === newNumber;
-    if (persons.some(isDuplicateNumber)) {
-      alert(`${newNumber} is already added to phonebook`)
-      return
+
+    const duplicate = persons.find((p) => p.name === newName)
+
+    if (duplicate) {
+      const sameNumber = duplicate.number === newNumber
+
+      if (sameNumber) {
+        alert(`${newName} is already added to phonebook`)
+        return
+      }
+
+      if (!sameNumber) {
+        if (window.confirm(`${newName} is already added to phonebook, replace old number with new one?`)) {
+          const replacement = { ...duplicate, number: newNumber }
+          personService
+            .update(duplicate.id, replacement)
+            .then(() => {
+              setPersons(persons.map(p => p.id === duplicate.id ? replacement : p))
+              setNewName('')
+              setNewNumber('')
+            })
+        }
+        return
+      }
     }
 
     const personObject = {
