@@ -3,7 +3,7 @@ import axios from 'axios'
 
 const App = () => {
   const [value, setValue] = useState('')
-  const [info, setInfo] = useState({})
+  const [info, setInfo] = useState([])
   const [country, setCountry] = useState(null)
 
   useEffect(() => {
@@ -32,9 +32,9 @@ const App = () => {
         find countries <input value={value} onChange={handleChange} />
         <button type="submit">search</button>
       </form>
-      <pre>
-        {JSON.stringify(info, null, 2)}
-      </pre>
+      {info.map(country => (
+        <div key={country.name.common}>{country.name.common}</div>
+      ))}
     </div>
   )
 }
