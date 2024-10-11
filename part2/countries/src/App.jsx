@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 
 import CountryForm from './components/CountryForm'
-import CountryList from './components/CountryList'
+import CountryInfo from './components/CountryInfo'
 
 const App = () => {
   const [filter, setFilter] = useState('')
@@ -23,7 +23,7 @@ const App = () => {
     <>
       <CountryForm filter={filter} setFilter={setFilter} />
 
-      <CountryList countries={countries} filter={filter} />
+      <CountryInfo countries={countries} filter={filter} />
     </>
   )
 }
