@@ -17,7 +17,7 @@ const Weather = ({capital}) => {
           console.log('Failed to fetch weather data:', error)
         })
     } else {
-      console.error('OpenWeather API key has not been provided - see README.md')
+      console.warn('OpenWeather API key has not been provided - see README.md')
     }
   }, [weatherUrl])
 
