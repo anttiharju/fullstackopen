@@ -4,12 +4,12 @@ import axios from 'axios'
 const Weather = ({capital}) => {
   const [weather, setWeather] = useState(null)
 
-  const key = import.meta.env.VITE_OPEN_WEATHER
-  const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${capital}&units=metric&appid=${key}`
+  const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${capital}&units=metric`
   useEffect(() => {
+    const key = import.meta.env.VITE_OPEN_WEATHER
     if (key) {
       axios
-        .get(weatherUrl)
+        .get(`${weatherUrl}&appid=${key}`)
         .then(response => {
           setWeather(response.data)
         })
@@ -19,7 +19,7 @@ const Weather = ({capital}) => {
     } else {
       console.error('OpenWeather API key has not been provided - see README.md')
     }
-  }, [key, weatherUrl])
+  }, [weatherUrl])
 
   if (!weather) {
     return (<></>)
