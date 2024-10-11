@@ -15,21 +15,22 @@ const Weather = ({capital}) => {
       })
   }, [weatherUrl])
 
-  if (weather){
-    const temp = weather.main.temp
-    const icon = weather.weather[0].icon
-    const desc = weather.weather[0].description
-    const wind = weather.wind.speed
-    return (
-      <>
-        <h2>Weather in {capital}</h2>
-        <div>temperature {temp} Celsius</div>
-        <img src={`https://openweathermap.org/img/wn/${icon}@2x.png`} alt={`${capital} has ${desc}`} />
-        <div>wind {wind} m/s</div>
-      </>
-    )
+  if (!weather){
+    return (<></>)
   }
-  return (<></>)
+
+  const temp = weather.main.temp
+  const icon = weather.weather[0].icon
+  const desc = weather.weather[0].description
+  const wind = weather.wind.speed
+  return (
+    <>
+      <h2>Weather in {capital}</h2>
+      <div>temperature {temp} Celsius</div>
+      <img src={`https://openweathermap.org/img/wn/${icon}@2x.png`} alt={`${capital} has ${desc}`} />
+      <div>wind {wind} m/s</div>
+    </>
+  )
 }
 
 export default Weather
