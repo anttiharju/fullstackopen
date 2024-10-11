@@ -23,7 +23,7 @@ const App = () => {
     <div>
       <h2>Phonebook</h2>
 
-      <Notification message={toast} />
+      <Notification message={toast} color={'green'} />
 
       <Filter filter={filter} setFilter={setFilter} />
 
