@@ -1,4 +1,4 @@
-const CountryForm = ({filter, setFilter}) => {
+const Search = ({filter, setFilter}) => {
 
   const handleChange = (event) => {
     setFilter(event.target.value)
@@ -11,4 +11,4 @@ const CountryForm = ({filter, setFilter}) => {
   )
 }
 
-export default CountryForm
+export default Search

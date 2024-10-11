@@ -1,12 +1,4 @@
 const CountryList = ({countries, setFilter}) => {
-  if (countries.length > 10) {
-    return (
-      <div>
-        Too many matches, specify another filter
-      </div>
-    )
-  }
-
   const onShow = (countryName) => {
     setFilter(countryName)
   }

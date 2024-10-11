@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
-import CountryForm from './components/CountryForm'
-import CountryInfo from './components/CountryInfo'
+import Search from './components/Search'
+import Results from './components/Results'
 
 const App = () => {
   const [filter, setFilter] = useState('Finland')
@@ -21,9 +21,9 @@ const App = () => {
 
   return (
     <>
-      <CountryForm filter={filter} setFilter={setFilter} />
+      <Search filter={filter} setFilter={setFilter} />
 
-      <CountryInfo countries={countries} filter={filter} setFilter={setFilter} />
+      <Results filter={filter} setFilter={setFilter} countries={countries} />
     </>
   )
 }
