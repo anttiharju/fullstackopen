@@ -18,3 +18,6 @@ trim_trailing_whitespace = unset
 
 [{test/fixtures,deps,tools/eslint/node_modules,tools/gyp,tools/icu,tools/msvs}/**]
 insert_final_newline = false
+
+[db.json]
+insert_final_newline = false
