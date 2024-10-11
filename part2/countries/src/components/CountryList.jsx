@@ -1,8 +1,5 @@
-const CountryList = ({countries, filter}) => {
-  const commonNameFilter = c => c.name.common.toLowerCase().includes(filter.toLowerCase())
-  const filteredCountries = countries.filter(commonNameFilter)
-
-  if (filteredCountries.length > 10) {
+const CountryList = ({countries}) => {
+  if (countries.length > 10) {
     return (
       <div>
         Too many matches, specify another filter
@@ -12,7 +9,7 @@ const CountryList = ({countries, filter}) => {
 
   return (
     <>
-      {filteredCountries.map(country => (
+      {countries.map(country => (
         <div key={country.name.common}>{country.name.common}</div>
       ))}
     </>
