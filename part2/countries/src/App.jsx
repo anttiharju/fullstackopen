@@ -5,11 +5,11 @@ import CountryForm from './components/CountryForm'
 import CountryList from './components/CountryList'
 
 const App = () => {
-  const [input, setInput] = useState('')
+  const [filter, setFilter] = useState('')
   const [countries, setCountries] = useState([])
 
   useEffect(() => {
-    if (input !== '') {
+    if (filter !== '') {
       console.log('fetching country info...')
       axios
         .get(`https://studies.cs.helsinki.fi/restcountries/api/all`)
@@ -17,11 +17,11 @@ const App = () => {
           setCountries(response.data)
         })
     }
-  }, [input])
+  }, [filter])
 
   return (
     <>
-      <CountryForm input={input} setInput={setInput} />
+      <CountryForm filter={filter} setFilter={setFilter} />
 
       <CountryList countries={countries} />
     </>
