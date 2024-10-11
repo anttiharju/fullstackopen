@@ -4,6 +4,20 @@ import Notification from './components/Notification'
 
 import noteService from './services/notes'
 
+const Footer = () => {
+  const footerStyle = {
+    color: 'green',
+    fontStyle: 'italic',
+    fontSize: 16
+  }
+  return (
+    <div style={footerStyle}>
+      <br />
+      <em>Note app, Department of Computer Science, University of Helsinki 2024</em>
+    </div>
+  )
+}
+
 const App = () => {
   const [notes, setNotes] = useState([])
   const [newNote, setNewNote] = useState('')
@@ -88,6 +102,8 @@ const App = () => {
         />
         <button type="submit">save</button>
       </form>
+
+      <Footer />
     </div>
   )
 }
