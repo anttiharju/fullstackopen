@@ -7,10 +7,9 @@ import CountryList from './components/CountryList'
 const App = () => {
   const [input, setInput] = useState('')
   const [countries, setCountries] = useState([])
-  const [country, setCountry] = useState(null)
 
   useEffect(() => {
-    if (country) {
+    if (input !== '') {
       console.log('fetching country info...')
       axios
         .get(`https://studies.cs.helsinki.fi/restcountries/api/all`)
@@ -18,11 +17,11 @@ const App = () => {
           setCountries(response.data)
         })
     }
-  }, [country])
+  }, [input])
 
   return (
     <>
-      <CountryForm input={input} setInput={setInput} setCountry={setCountry} />
+      <CountryForm input={input} setInput={setInput} />
 
       <CountryList countries={countries} />
     </>
