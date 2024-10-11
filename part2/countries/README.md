@@ -1,3 +1,3 @@
 # countries
 
-To see weather information, you need to add a .env.local file supplying value `VITE_OPEN_WEATHER` that equals to a https://openweathermap.org/ API key.
+To see weather information, you need to create file `.env.local` that supplies an OpenWeather API key via `VITE_OPEN_WEATHER`. If you're logged in at https://openweathermap.org/, you can access API keys at https://home.openweathermap.org/api_keys.

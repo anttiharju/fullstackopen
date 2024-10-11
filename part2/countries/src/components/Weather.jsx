@@ -7,15 +7,19 @@ const Weather = ({capital}) => {
   const key = import.meta.env.VITE_OPEN_WEATHER
   const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${capital}&units=metric&appid=${key}`
   useEffect(() => {
-    axios
-      .get(weatherUrl)
-      .then(response => {
-        setWeather(response.data)
-      })
-      .catch(error => {
-        console.log('Failed to fetch weather data:', error)
-      })
-  }, [weatherUrl])
+    if (key) {
+      axios
+        .get(weatherUrl)
+        .then(response => {
+          setWeather(response.data)
+        })
+        .catch(error => {
+          console.log('Failed to fetch weather data:', error)
+        })
+    } else {
+      console.error('OpenWeather API key has not been provided - see README.md')
+    }
+  }, [key, weatherUrl])
 
   if (!weather) {
     return (<></>)
