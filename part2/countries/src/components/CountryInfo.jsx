@@ -1,6 +1,6 @@
 import CountryList from './CountryList'
 
-const CountryInfo = ({countries, filter}) => {
+const CountryInfo = ({countries, filter, setFilter}) => {
   const commonNameFilter = c => c.name.common.toLowerCase().includes(filter.toLowerCase())
   const filteredCountries = countries.filter(commonNameFilter)
 
@@ -21,7 +21,7 @@ const CountryInfo = ({countries, filter}) => {
       </>
     )
   }
-  return (<CountryList countries={filteredCountries} />)
+  return (<CountryList countries={filteredCountries} setFilter={setFilter} />)
 }
 
 export default CountryInfo

@@ -1,4 +1,4 @@
-const CountryList = ({countries}) => {
+const CountryList = ({countries, setFilter}) => {
   if (countries.length > 10) {
     return (
       <div>
@@ -7,10 +7,16 @@ const CountryList = ({countries}) => {
     )
   }
 
+  const onShow = (countryName) => {
+    setFilter(countryName)
+  }
+
   return (
     <>
       {countries.map(country => (
-        <div key={country.name.common}>{country.name.common}</div>
+        <div key={country.name.common}>
+          {country.name.common} <button onClick={() => onShow(country.name.common)}>show</button>
+        </div>
       ))}
     </>
   )
