@@ -10,6 +10,7 @@ const App = () => {
   const [persons, setPersons] = useState([])
   const [filter, setFilter] = useState('')
   const [toast, setToast] = useState(null)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
     personService
@@ -24,12 +25,18 @@ const App = () => {
       <h2>Phonebook</h2>
 
       <Notification message={toast} color={'green'} />
+      <Notification message={error} color={'red'} />
 
       <Filter filter={filter} setFilter={setFilter} />
 
       <h3>add a new</h3>
 
-      <PersonForm persons={persons} setPersons={setPersons} setToast={setToast} />
+      <PersonForm
+      persons={persons}
+      setPersons={setPersons}
+      setToast={setToast}
+      setError={setError}
+      />
 
       <h3>Numbers</h3>
 

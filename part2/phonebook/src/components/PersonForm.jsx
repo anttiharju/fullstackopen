@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import personService from '../services/persons'
 
-const PersonForm = ({persons, setPersons, setToast}) => {
+const PersonForm = ({persons, setPersons, setToast, setError}) => {
   const [newName, setNewName] = useState('')
   const handleNameInput = (event) => {
     setNewName(event.target.value)
@@ -34,6 +34,15 @@ const PersonForm = ({persons, setPersons, setToast}) => {
               setPersons(persons.map(p => p.id === duplicate.id ? replacement : p))
               setNewName('')
               setNewNumber('')
+            })
+            .catch(error => {
+              setPersons(persons.filter(p => p.id !== duplicate.id))
+              setError(
+                `Information of ${duplicate.name} has already been removed from server`
+              )
+              setTimeout(() => {
+                setError(null)
+              }, 5000)
             })
         }
         return
