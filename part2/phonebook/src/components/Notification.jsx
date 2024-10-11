@@ -1,6 +1,10 @@
-const Notification = ({ message }) => {
-  const toastStyle = {
-    color: 'green',
+const Notification = ({ message, color }) => {
+  if (message === null) {
+    return null
+  }
+
+  const style = {
+    color: color,
     background: 'lightgrey',
     fontSize: 20,
     borderStyle: 'solid',
@@ -8,13 +12,8 @@ const Notification = ({ message }) => {
     padding: 10,
     marginBottom: 10
   }
-
-  if (message === null) {
-    return null
-  }
-
   return (
-    <div style={toastStyle} className='error'>
+    <div style={style} className='error'>
       {message}
     </div>
   )
