@@ -12,6 +12,9 @@ const Weather = ({capital}) => {
       .then(response => {
         setWeather(response.data)
       })
+      .catch(error => {
+        console.log('Failed to fetch weather data:', error)
+      })
   }, [weatherUrl])
 
   if (!weather) {
