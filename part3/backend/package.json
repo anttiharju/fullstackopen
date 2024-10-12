@@ -8,5 +8,8 @@
   },
   "author": "Antti Harju",
   "license": "MIT",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "express": "^4.21.1"
+  }
 }
