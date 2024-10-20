@@ -1,5 +1,7 @@
 import axios from 'axios'
-const baseUrl = '/api/persons'
+
+// window.location.origin is a patch for Safari compatibility on fly.io
+const baseUrl = `${window.location.origin}/api/persons`
 
 const getAll = () => {
   const request = axios.get(baseUrl)
