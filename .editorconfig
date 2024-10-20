@@ -21,3 +21,7 @@ insert_final_newline = false
 
 [db.json]
 insert_final_newline = false
+
+[.gitmodules]
+indent_style = tab
+tab_width = 4
