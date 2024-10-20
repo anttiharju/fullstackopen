@@ -22,6 +22,6 @@ insert_final_newline = false
 [db.json]
 insert_final_newline = false
 
-[.gitmodules]
+[{.gitmodules,Makefile}]
 indent_style = tab
 tab_width = 4
