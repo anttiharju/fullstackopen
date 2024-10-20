@@ -1,4 +1,4 @@
 [submodule "part3/phonebook-backend"]
-	path = part3/phonebook-backend
+	path = part3/backend
 	url = git@github.com:anttiharju/fullstackopen-phonebook-backend.git
 	branch = main

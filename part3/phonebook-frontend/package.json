@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "server": "json-server -p3001 --watch db.json",
-    "copy": "npm run build && cp -r dist ../phonebook-backend/frontend"
+    "copy": "npm run build && cp -r dist ../backend/frontend"
   },
   "dependencies": {
     "axios": "^1.7.7",
