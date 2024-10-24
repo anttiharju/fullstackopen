@@ -5,9 +5,9 @@ MAKEFLAGS += --warn-undefined-variables
 
 .PHONY: submodules
 
-submodules: part3/backend/package.json
+submodules: part3/backend/.git
 
-part3/backend/package.json:
+part3/backend/.git:
 	@git config submodule.recurse true
 	@git submodule update --init
 	@git submodule foreach \
