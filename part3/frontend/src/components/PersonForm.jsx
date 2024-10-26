@@ -49,6 +49,22 @@ const PersonForm = ({persons, setPersons, setToast, setError}) => {
       }
     }
 
+    if (!newName) {
+      setError('Name cannot be empty')
+      setTimeout(() => {
+        setError(null)
+      }, 5000)
+      return
+    }
+
+    if (!newNumber) {
+      setError('Number cannot be empty')
+      setTimeout(() => {
+        setError(null)
+      }, 5000)
+      return
+    }
+
     const personObject = {
       name: newName,
       number: newNumber,
