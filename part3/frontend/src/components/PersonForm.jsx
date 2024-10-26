@@ -36,10 +36,7 @@ const PersonForm = ({persons, setPersons, setToast, setError}) => {
               setNewNumber('')
             })
             .catch(error => {
-              setPersons(persons.filter(p => p.id !== duplicate.id))
-              setError(
-                `Information of ${duplicate.name} has already been removed from server`
-              )
+              setError(error.response.data.error)
               setTimeout(() => {
                 setError(null)
               }, 5000)
