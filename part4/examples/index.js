@@ -37,8 +37,9 @@ const unknownEndpoint = (request, response) => {
   response.status(404).send({ error: 'unknown endpoint' })
 }
 
-app.get('/', (request, response) => {
-  response.send('<h1>Hello World!</h1>')
+app.get('/', async (request, response) => {
+  const notes = await Note.find({})
+  response.json(notes)
 })
 
 app.get('/api/notes', (request, response) => {
@@ -97,6 +98,6 @@ app.put('/api/notes/:id', (request, response, next) => {
 app.use(unknownEndpoint)
 app.use(errorHandler)
 
-app.listen(PORT, () => {
+app.listen(config.PORT, () => {
   logger.info(`Server running on port ${config.PORT}`)
 })
