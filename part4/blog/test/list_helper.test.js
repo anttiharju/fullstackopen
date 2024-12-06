@@ -65,7 +65,7 @@ test('dummy returns one', () => {
 })
 
 describe('totalLikes counts the sum of likes', () => {
-  test('when list has only one blog, equals the likes of that', () => {
+  test('when list has just one blog, equals the likes of that', () => {
     const result = listHelper.totalLikes(listWithOneBlog)
     assert.strictEqual(result, 5)
   })
