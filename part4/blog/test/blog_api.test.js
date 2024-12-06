@@ -55,7 +55,7 @@ test('a valid blog can be added ', async () => {
   const blogsAtEnd = await helper.blogsInDb()
   assert.strictEqual(blogsAtEnd.length, helper.initialBlogs.length + 1)
 
-  const titles = blogsAtEnd.map(n => n.title)
+  const titles = blogsAtEnd.map(b => b.title)
   assert(titles.includes('Go Proverbs'))
 })
 
@@ -103,7 +103,7 @@ test('trying to add a blog without an url is rejected', async () => {
     .expect(400)
 })
 
-test.only('a blog can be deleted', async () => {
+test('a blog can be deleted', async () => {
   const blogsAtStart = await helper.blogsInDb()
   const blogToDelete = blogsAtStart[0]
 
@@ -113,7 +113,7 @@ test.only('a blog can be deleted', async () => {
 
   const blogsAtEnd = await helper.blogsInDb()
 
-  const titles = blogsAtEnd.map(r => r.title)
+  const titles = blogsAtEnd.map(b => b.title)
   assert(!titles.includes(blogToDelete.title))
 
   assert.strictEqual(blogsAtEnd.length, helper.initialBlogs.length - 1)
