@@ -79,6 +79,30 @@ test('adding a blog without likes defaults likes to 0', async () => {
   assert.strictEqual(addedBlog.likes, 0)
 })
 
+test('trying to add a blog without a title is rejected', async () => {
+  const newBlog = {
+    author: 'Andy Hertzfield',
+    url: 'https://www.folklore.org/Negative_2000_Lines_Of_Code.html'
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(400)
+})
+
+test('trying to add a blog without an url is rejected', async () => {
+  const newBlog = {
+    title: '-2000 Lines of Code',
+    author: 'Andy Hertzfield',
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(400)
+})
+
 test.only('a blog can be deleted', async () => {
   const blogsAtStart = await helper.blogsInDb()
   const blogToDelete = blogsAtStart[0]
