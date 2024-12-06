@@ -1,4 +1,4 @@
-SHELL := /bin/sh
+SHELL := /usr/bin/env sh
 .ONESHELL:
 .SHELLFLAGS := -eu -c
 MAKEFLAGS += --warn-undefined-variables
