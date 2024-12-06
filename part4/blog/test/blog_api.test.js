@@ -59,6 +59,26 @@ test('a valid blog can be added ', async () => {
   assert(titles.includes('Go Proverbs'))
 })
 
+test('adding a blog without likes defaults likes to 0', async () => {
+  const newBlog = {
+    title: '-2000 Lines of Code',
+    author: 'Andy Hertzfield',
+    url: 'https://www.folklore.org/Negative_2000_Lines_Of_Code.html'
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+
+  const blogsAtEnd = await helper.blogsInDb()
+  assert.strictEqual(blogsAtEnd.length, helper.initialBlogs.length + 1)
+
+  const addedBlog = blogsAtEnd.find(b => b.title === '-2000 Lines of Code')
+  assert.strictEqual(addedBlog.likes, 0)
+})
+
 test.only('a blog can be deleted', async () => {
   const blogsAtStart = await helper.blogsInDb()
   const blogToDelete = blogsAtStart[0]
