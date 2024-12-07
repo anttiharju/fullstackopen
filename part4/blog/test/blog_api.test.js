@@ -122,52 +122,54 @@ describe('when there is initially some blogs saved', () => {
     assert.strictEqual(blogsAtEnd.length, helper.initialBlogs.length - 1)
   })
 
-  test('a blog can be updated', async () => {
-    const blogsAtStart = await helper.blogsInDb()
-    const blogToUpdate = blogsAtStart[0]
+  describe('updating a blog', () => {
+    test('succeeds by providing just the likes', async () => {
+      const blogsAtStart = await helper.blogsInDb()
+      const blogToUpdate = blogsAtStart[0]
 
-    const newBlog = {
-      likes: blogToUpdate.likes + 1
-    }
+      const newBlog = {
+        likes: blogToUpdate.likes + 1
+      }
 
-    const updatedBlog = await api
-      .put(`/api/blogs/${blogToUpdate.id}`)
-      .send(newBlog)
-      .expect(200)
-      .expect('Content-Type', /application\/json/)
+      const updatedBlog = await api
+        .put(`/api/blogs/${blogToUpdate.id}`)
+        .send(newBlog)
+        .expect(200)
+        .expect('Content-Type', /application\/json/)
 
-    assert.deepStrictEqual(
-      updatedBlog.body,
-      {...blogToUpdate, likes: blogToUpdate.likes + 1}
-    )
-  })
+      assert.deepStrictEqual(
+        updatedBlog.body,
+        {...blogToUpdate, likes: blogToUpdate.likes + 1}
+      )
+    })
 
-  test('updating a blog with an empty name fails', async () => {
-    const blogsAtStart = await helper.blogsInDb()
-    const blogToUpdate = blogsAtStart[0]
+    test('fails if the title is empty', async () => {
+      const blogsAtStart = await helper.blogsInDb()
+      const blogToUpdate = blogsAtStart[0]
 
-    const newBlog = {
-      title: "",
-    }
+      const newBlog = {
+        title: "",
+      }
 
-    await api
-      .put(`/api/blogs/${blogToUpdate.id}`)
-      .send(newBlog)
-      .expect(400)
-  })
+      await api
+        .put(`/api/blogs/${blogToUpdate.id}`)
+        .send(newBlog)
+        .expect(400)
+    })
 
-  test('updating a blog with an empty url fails', async () => {
-    const blogsAtStart = await helper.blogsInDb()
-    const blogToUpdate = blogsAtStart[0]
+    test('fails if the url is empty', async () => {
+      const blogsAtStart = await helper.blogsInDb()
+      const blogToUpdate = blogsAtStart[0]
 
-    const newBlog = {
-      url: "",
-    }
+      const newBlog = {
+        url: "",
+      }
 
-    await api
-      .put(`/api/blogs/${blogToUpdate.id}`)
-      .send(newBlog)
-      .expect(400)
+      await api
+        .put(`/api/blogs/${blogToUpdate.id}`)
+        .send(newBlog)
+        .expect(400)
+    })
   })
 
   after(async () => {
