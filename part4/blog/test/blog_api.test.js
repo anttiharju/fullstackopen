@@ -39,69 +39,71 @@ describe('when there is initially some blogs saved', () => {
     }
   })
 
-  test('a valid blog can be added ', async () => {
-    const newBlog = {
-      title: "Go Proverbs",
-      author: "Rob Pike",
-      url: "https://go-proverbs.github.io",
-      likes: 4
-    }
+  describe('addition of a new blog', () => {
+    test('succeeds with a valid new blog', async () => {
+      const newBlog = {
+        title: "Go Proverbs",
+        author: "Rob Pike",
+        url: "https://go-proverbs.github.io",
+        likes: 4
+      }
 
-    await api
-      .post('/api/blogs')
-      .send(newBlog)
-      .expect(201)
-      .expect('Content-Type', /application\/json/)
+      await api
+        .post('/api/blogs')
+        .send(newBlog)
+        .expect(201)
+        .expect('Content-Type', /application\/json/)
 
-    const blogsAtEnd = await helper.blogsInDb()
-    assert.strictEqual(blogsAtEnd.length, helper.initialBlogs.length + 1)
+      const blogsAtEnd = await helper.blogsInDb()
+      assert.strictEqual(blogsAtEnd.length, helper.initialBlogs.length + 1)
 
-    const titles = blogsAtEnd.map(b => b.title)
-    assert(titles.includes('Go Proverbs'))
-  })
+      const titles = blogsAtEnd.map(b => b.title)
+      assert(titles.includes('Go Proverbs'))
+    })
 
-  test('adding a blog without likes defaults likes to 0', async () => {
-    const newBlog = {
-      title: '-2000 Lines of Code',
-      author: 'Andy Hertzfield',
-      url: 'https://www.folklore.org/Negative_2000_Lines_Of_Code.html'
-    }
+    test('succeeds even if likes are not provided which default to 0', async () => {
+      const newBlog = {
+        title: '-2000 Lines of Code',
+        author: 'Andy Hertzfield',
+        url: 'https://www.folklore.org/Negative_2000_Lines_Of_Code.html'
+      }
 
-    await api
-      .post('/api/blogs')
-      .send(newBlog)
-      .expect(201)
-      .expect('Content-Type', /application\/json/)
+      await api
+        .post('/api/blogs')
+        .send(newBlog)
+        .expect(201)
+        .expect('Content-Type', /application\/json/)
 
-    const blogsAtEnd = await helper.blogsInDb()
-    assert.strictEqual(blogsAtEnd.length, helper.initialBlogs.length + 1)
+      const blogsAtEnd = await helper.blogsInDb()
+      assert.strictEqual(blogsAtEnd.length, helper.initialBlogs.length + 1)
 
-    const addedBlog = blogsAtEnd.find(b => b.title === '-2000 Lines of Code')
-    assert.strictEqual(addedBlog.likes, 0)
-  })
+      const addedBlog = blogsAtEnd.find(b => b.title === '-2000 Lines of Code')
+      assert.strictEqual(addedBlog.likes, 0)
+    })
 
-  test('trying to add a blog without a title is rejected', async () => {
-    const newBlog = {
-      author: 'Andy Hertzfield',
-      url: 'https://www.folklore.org/Negative_2000_Lines_Of_Code.html'
-    }
+    test('fails when the blog is missing a title', async () => {
+      const newBlog = {
+        author: 'Andy Hertzfield',
+        url: 'https://www.folklore.org/Negative_2000_Lines_Of_Code.html'
+      }
 
-    await api
-      .post('/api/blogs')
-      .send(newBlog)
-      .expect(400)
-  })
+      await api
+        .post('/api/blogs')
+        .send(newBlog)
+        .expect(400)
+    })
 
-  test('trying to add a blog without an url is rejected', async () => {
-    const newBlog = {
-      title: '-2000 Lines of Code',
-      author: 'Andy Hertzfield',
-    }
+    test('fails when the blog is missing an url', async () => {
+      const newBlog = {
+        title: '-2000 Lines of Code',
+        author: 'Andy Hertzfield',
+      }
 
-    await api
-      .post('/api/blogs')
-      .send(newBlog)
-      .expect(400)
+      await api
+        .post('/api/blogs')
+        .send(newBlog)
+        .expect(400)
+    })
   })
 
   test('a blog can be deleted', async () => {
