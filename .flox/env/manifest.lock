@@ -1,0 +1,152 @@
+{
+  "lockfile-version": 1,
+  "manifest": {
+    "version": 1,
+    "install": {
+      "nodejs": {
+        "pkg-path": "nodejs",
+        "version": "20.11.0"
+      }
+    },
+    "hook": {},
+    "profile": {},
+    "options": {
+      "systems": [
+        "aarch64-darwin",
+        "aarch64-linux",
+        "x86_64-darwin",
+        "x86_64-linux"
+      ],
+      "allow": {
+        "licenses": []
+      },
+      "semver": {}
+    }
+  },
+  "packages": [
+    {
+      "attr_path": "nodejs",
+      "broken": false,
+      "derivation": "/nix/store/r5vfysbnjhcdjqvzmz1bw0v11nqiha9a-nodejs-20.11.0.drv",
+      "description": "Event-driven I/O framework for the V8 JavaScript engine",
+      "install_id": "nodejs",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=f9d39fb9aff0efee4a3d5f4a6d7c17701d38a1d8",
+      "name": "nodejs-20.11.0",
+      "pname": "nodejs",
+      "rev": "f9d39fb9aff0efee4a3d5f4a6d7c17701d38a1d8",
+      "rev_count": 583447,
+      "rev_date": "2024-02-11T22:04:38Z",
+      "scrape_date": "2024-08-15T22:05:58Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "20.11.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "libv8": "/nix/store/90n96f58s8rayjqadfmw0gavc06gky67-nodejs-20.11.0-libv8",
+        "out": "/nix/store/yxjxfg053nbr6rqzcicifsvzab8aa072-nodejs-20.11.0"
+      },
+      "system": "aarch64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "nodejs",
+      "broken": false,
+      "derivation": "/nix/store/6b8i6w7iba8bdai53cy36gyi9yl51r1n-nodejs-20.11.0.drv",
+      "description": "Event-driven I/O framework for the V8 JavaScript engine",
+      "install_id": "nodejs",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=f9d39fb9aff0efee4a3d5f4a6d7c17701d38a1d8",
+      "name": "nodejs-20.11.0",
+      "pname": "nodejs",
+      "rev": "f9d39fb9aff0efee4a3d5f4a6d7c17701d38a1d8",
+      "rev_count": 583447,
+      "rev_date": "2024-02-11T22:04:38Z",
+      "scrape_date": "2024-08-15T22:05:58Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "20.11.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "libv8": "/nix/store/7c6m6jhjsfcz7j0hyhr4032fy5s6a3m9-nodejs-20.11.0-libv8",
+        "out": "/nix/store/h1m0fzcyr6z2k8bd0xh2lsh2fsl755qg-nodejs-20.11.0"
+      },
+      "system": "aarch64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "nodejs",
+      "broken": false,
+      "derivation": "/nix/store/wcylyvzcha2ddzihmsd6a5sip2m9g8fi-nodejs-20.11.0.drv",
+      "description": "Event-driven I/O framework for the V8 JavaScript engine",
+      "install_id": "nodejs",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=f9d39fb9aff0efee4a3d5f4a6d7c17701d38a1d8",
+      "name": "nodejs-20.11.0",
+      "pname": "nodejs",
+      "rev": "f9d39fb9aff0efee4a3d5f4a6d7c17701d38a1d8",
+      "rev_count": 583447,
+      "rev_date": "2024-02-11T22:04:38Z",
+      "scrape_date": "2024-08-15T22:05:58Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "20.11.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "libv8": "/nix/store/nwyf7mgdigp45gx7rpkwx74jbpgxsvxb-nodejs-20.11.0-libv8",
+        "out": "/nix/store/3pj6w808qk7w70bx13xjpzzc9mylkwj9-nodejs-20.11.0"
+      },
+      "system": "x86_64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "nodejs",
+      "broken": false,
+      "derivation": "/nix/store/6lrd7sr861sizxf3hyvmsqc2w6w81bb3-nodejs-20.11.0.drv",
+      "description": "Event-driven I/O framework for the V8 JavaScript engine",
+      "install_id": "nodejs",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=f9d39fb9aff0efee4a3d5f4a6d7c17701d38a1d8",
+      "name": "nodejs-20.11.0",
+      "pname": "nodejs",
+      "rev": "f9d39fb9aff0efee4a3d5f4a6d7c17701d38a1d8",
+      "rev_count": 583447,
+      "rev_date": "2024-02-11T22:04:38Z",
+      "scrape_date": "2024-08-15T22:05:58Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "20.11.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "libv8": "/nix/store/89w4hkvsrhaclc7qisqjjrsajgdk78ib-nodejs-20.11.0-libv8",
+        "out": "/nix/store/q5akp9kqri454q5d2bcp6fphj3k0xsdf-nodejs-20.11.0"
+      },
+      "system": "x86_64-linux",
+      "group": "toplevel",
+      "priority": 5
+    }
+  ]
+}
