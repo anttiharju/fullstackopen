@@ -1,0 +1,11 @@
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+Authorization: Bearer JWT_TOKEN
+
+{
+  "title": "Don’t just check errors, handle them gracefully",
+  "author": "Dave Cheney",
+  "url": "https://dave.cheney.net/2016/04/27/dont-just-check-errors-handle-them-gracefully",
+  "likes": 2,
+  "userId": "6765c777d21f4a28ae1ab292"
+}

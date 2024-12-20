@@ -1,0 +1,3 @@
+DELETE http://localhost:3003/api/blogs/6765c9255825a9f36ea38231
+Content-Type: application/json
+Authorization: Bearer JWT_TOKEN
