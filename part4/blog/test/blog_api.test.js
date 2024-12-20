@@ -309,7 +309,6 @@ describe('when there is initially some blogs saved', () => {
 
       const usersAtEnd = await helper.usersInDb()
 
-      console.log(result.body.error)
       assert(result.body.error.includes('Path `password` is required'))
 
       assert.strictEqual(usersAtEnd.length, usersAtStart.length)
