@@ -9,17 +9,20 @@ const bcrypt = require('bcrypt')
 
 const Blog = require('../models/blog')
 const User = require('../models/user')
+let user
 let token
 
 before(async () => {
   await User.deleteMany({})
-  await api
+  const account = await api
     .post('/api/users')
     .send({
       name: 'Test User',
       username: 'testuser',
       password: 'wordpass'
     })
+
+  user = account.body.id
 
   const auth = await api
     .post('/api/login')
@@ -36,7 +39,10 @@ describe('when there is initially some blogs saved', () => {
     await Blog.deleteMany({})
 
     for (let blog of helper.initialBlogs) {
-      let blogObject = new Blog(blog)
+      const blogObject = new Blog({
+        ...blog,
+        user
+      });
       await blogObject.save()
     }
   })
@@ -139,6 +145,7 @@ describe('when there is initially some blogs saved', () => {
 
     await api
       .delete(`/api/blogs/${blogToDelete.id}`)
+      .set({ 'Authorization': `Bearer ${token}` })
       .expect(204)
 
     const blogsAtEnd = await helper.blogsInDb()
@@ -152,13 +159,16 @@ describe('when there is initially some blogs saved', () => {
   describe('updating a blog', () => {
     test('succeeds by providing just the likes', async () => {
       const blogsAtStart = await helper.blogsInDb()
-      const blogToUpdate = blogsAtStart[0]
+      const blogToUpdate = {
+        ...blogsAtStart[0],
+        user
+      };
 
       const newBlog = {
         likes: blogToUpdate.likes + 1
       }
 
-      const updatedBlog = await api
+      let updatedBlog = await api
         .put(`/api/blogs/${blogToUpdate.id}`)
         .send(newBlog)
         .expect(200)
