@@ -91,6 +91,24 @@ describe('when there is initially some blogs saved', () => {
       assert(titles.includes('Go Proverbs'))
     })
 
+    test('fails if user is not authenticated', async () => {
+      // I miss httptest from Go ;_;
+      const newBlog = {
+        title: "mocking outbound http requests in go: you’re (probably) doing it wrong",
+        author: "Sonya Huang",
+        url: "https://medium.com/zus-health/mocking-outbound-http-requests-in-go-youre-probably-doing-it-wrong-60373a38d2aa",
+        likes: 1
+      }
+
+      await api
+        .post('/api/blogs')
+        .send(newBlog)
+        .expect(401)
+
+      const blogsAtEnd = await helper.blogsInDb()
+      assert.strictEqual(blogsAtEnd.length, helper.initialBlogs.length)
+    })
+
     test('succeeds even if likes are not provided which default to 0', async () => {
       const newBlog = {
         title: '-2000 Lines of Code',
