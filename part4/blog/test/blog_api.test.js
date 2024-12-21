@@ -159,10 +159,7 @@ describe('when there is initially some blogs saved', () => {
   describe('updating a blog', () => {
     test('succeeds by providing just the likes', async () => {
       const blogsAtStart = await helper.blogsInDb()
-      const blogToUpdate = {
-        ...blogsAtStart[0],
-        user
-      };
+      const blogToUpdate = blogsAtStart[0]
 
       const newBlog = {
         likes: blogToUpdate.likes + 1
