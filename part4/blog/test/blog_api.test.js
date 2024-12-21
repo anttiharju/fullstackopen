@@ -1,4 +1,4 @@
-const { test, after, beforeEach, describe } = require('node:test')
+const { test, after, before, beforeEach, describe } = require('node:test')
 const assert = require('node:assert')
 const supertest = require('supertest')
 const mongoose = require('mongoose')
@@ -9,6 +9,27 @@ const bcrypt = require('bcrypt')
 
 const Blog = require('../models/blog')
 const User = require('../models/user')
+let token
+
+before(async () => {
+  await User.deleteMany({})
+  await api
+    .post('/api/users')
+    .send({
+      name: 'Test User',
+      username: 'testuser',
+      password: 'wordpass'
+    })
+
+  const auth = await api
+    .post('/api/login')
+    .send({
+      username: 'testuser',
+      password: 'wordpass'
+    })
+
+  token = auth.body.token
+})
 
 describe('when there is initially some blogs saved', () => {
   beforeEach(async () => {
@@ -52,6 +73,7 @@ describe('when there is initially some blogs saved', () => {
 
       await api
         .post('/api/blogs')
+        .set({ 'Authorization': `Bearer ${token}` })
         .send(newBlog)
         .expect(201)
         .expect('Content-Type', /application\/json/)
