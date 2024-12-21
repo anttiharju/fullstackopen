@@ -94,6 +94,7 @@ describe('when there is initially some blogs saved', () => {
 
       await api
         .post('/api/blogs')
+        .set({ 'Authorization': `Bearer ${token}` })
         .send(newBlog)
         .expect(201)
         .expect('Content-Type', /application\/json/)
@@ -113,6 +114,7 @@ describe('when there is initially some blogs saved', () => {
 
       await api
         .post('/api/blogs')
+        .set({ 'Authorization': `Bearer ${token}` })
         .send(newBlog)
         .expect(400)
     })
@@ -125,6 +127,7 @@ describe('when there is initially some blogs saved', () => {
 
       await api
         .post('/api/blogs')
+        .set({ 'Authorization': `Bearer ${token}` })
         .send(newBlog)
         .expect(400)
     })
