@@ -1,14 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Blog from './components/Blog'
+import Togglable from './components/Togglable'
+import BlogForm from './components/BlogForm'
 import Notification from './components/Notification'
 import blogService from './services/blogs'
 import loginService from './services/login'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
-  const [newTitle, setNewTitle] = useState("")
-  const [newAuthor, setNewAuthor] = useState("")
-  const [newUrl, setNewUrl] = useState("")
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
@@ -97,38 +96,15 @@ const App = () => {
     </>
   )
 
-  const handleTitleChange = (event) => {
-    setNewTitle(event.target.value)
-  }
-  const handleAuthorChange = (event) => {
-    setNewAuthor(event.target.value)
-  }
-  const handleUrlChange = (event) => {
-    setNewUrl(event.target.value)
-  }
-
   const blogForm = () => (
     <div>
       <h2>blogs</h2>
       <Notification message={toastMessage} color="green" />
       <Notification message={errorMessage} color="red" />
       <p>{user.name} logged in <button type="submit" onClick={() => handleLogout()}>logout</button></p>
-      <h2>create new</h2>
-      <form onSubmit={addBlog}>
-        title:<input
-          value={newTitle}
-          onChange={handleTitleChange}
-        /><br />
-        author:<input
-          value={newAuthor}
-          onChange={handleAuthorChange}
-        /><br />
-        url:<input
-          value={newUrl}
-          onChange={handleUrlChange}
-        /><br />
-        <button type="submit">create</button>
-      </form>
+      <Togglable buttonLabel="new blog" ref={blogFormRef}>
+        <BlogForm createBlog={addBlog} />
+      </Togglable>
       <div>
         {blogs.map(blog =>
           <Blog key={blog.id} blog={blog} />
@@ -137,30 +113,20 @@ const App = () => {
     </div>
   )
 
-  const addBlog = async (event) => {
-    event.preventDefault()
-    const blogObject = {
-      title: newTitle,
-      author: newAuthor,
-      url: newUrl,
-    }
-
+  const addBlog = async (blogObject) => {
     try {
+      blogFormRef.current.toggleVisibility()
       const returnedBlog = await blogService.create(blogObject)
       setBlogs(blogs.concat(returnedBlog))
-      setToastMessage(
-        `a new blog ${newTitle} by ${newAuthor} added`
-      )
+      setToastMessage(`a new blog ${blogObject.title} by ${blogObject.author} added`)
       setTimeout(() => {
         setToastMessage(null)
       }, 5000)
-      setNewAuthor('')
-      setNewTitle('')
-      setNewUrl('')
     } catch (error) {
       console.error('Failed to create blog:', error)
     }
   }
+  const blogFormRef = useRef()
 
   return (
     user === null ?
