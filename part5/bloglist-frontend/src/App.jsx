@@ -52,7 +52,7 @@ const App = () => {
       setUsername('')
       setPassword('')
     } catch (error) {
-      console.log(error)
+      console.error("Failed to login", error)
 
       setErrorMessage(
         `wrong username or password`
