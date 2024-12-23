@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import Blog from './components/Blog'
+import Notification from './components/Notification'
 import blogService from './services/blogs'
 import loginService from './services/login'
 
@@ -11,6 +12,8 @@ const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
+  const [toastMessage, setToastMessage] = useState("toast")
+  const [errorMessage, setErrorMessage] = useState("error")
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -136,6 +139,8 @@ const App = () => {
     loginForm() :
     <div>
       <h2>blogs</h2>
+      <Notification message={toastMessage} color="green" />
+      <Notification message={errorMessage} color="red" />
       <p>{user.name} logged in <button type="submit" onClick={() => handleLogout()}>logout</button></p>
       {blogForm()}
     </div>
