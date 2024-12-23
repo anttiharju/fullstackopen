@@ -108,7 +108,10 @@ const App = () => {
   }
 
   const blogForm = () => (
-    <>
+    <div>
+      <h2>blogs</h2>
+      <Notification message={toastMessage} color="green" />
+      <p>{user.name} logged in <button type="submit" onClick={() => handleLogout()}>logout</button></p>
       <h2>create new</h2>
       <form onSubmit={addBlog}>
         title:<input
@@ -130,7 +133,7 @@ const App = () => {
           <Blog key={blog.id} blog={blog} />
         )}
       </div>
-    </>
+    </div>
   )
 
   const addBlog = async (event) => {
@@ -155,13 +158,7 @@ const App = () => {
   return (
     user === null ?
     loginForm() :
-    <div>
-      <h2>blogs</h2>
-      <Notification message={toastMessage} color="green" />
-      <Notification message={errorMessage} color="red" />
-      <p>{user.name} logged in <button type="submit" onClick={() => handleLogout()}>logout</button></p>
-      {blogForm()}
-    </div>
+    blogForm()
   )
 }
 
