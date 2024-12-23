@@ -16,9 +16,9 @@ const App = () => {
 
   function byLikes(b1, b2) {
     if (b1.likes < b2.likes) {
-      return 1;
+      return 1
     } else if (b1.likes > b2.likes) {
-      return -1;
+      return -1
     }
     return 0
   }
@@ -32,7 +32,7 @@ const App = () => {
         console.error('Failed to fetch blogs:', error)
       }
     }
-    getBlogs();
+    getBlogs()
   }, [])
 
   useEffect(() => {
@@ -61,10 +61,10 @@ const App = () => {
       setUsername('')
       setPassword('')
     } catch (error) {
-      console.error("Failed to login", error)
+      console.error('Failed to login', error)
 
       setErrorMessage(
-        `wrong username or password`
+        'wrong username or password'
       )
       setTimeout(() => {
         setErrorMessage(null)
@@ -74,7 +74,7 @@ const App = () => {
 
   const handleLogout = async () => {
     window.localStorage.removeItem('loggedBlogappUser')
-    window.location.reload();
+    window.location.reload()
   }
 
   const loginForm = () => (
@@ -84,7 +84,7 @@ const App = () => {
       <form onSubmit={handleLogin}>
         <div>
           username
-            <input
+          <input
             type="text"
             value={username}
             name="Username"
@@ -93,7 +93,7 @@ const App = () => {
         </div>
         <div>
           password
-            <input
+          <input
             type="password"
             value={password}
             name="Password"
@@ -155,8 +155,8 @@ const App = () => {
 
   return (
     user === null ?
-    loginForm() :
-    blogForm()
+      loginForm() :
+      blogForm()
   )
 }
 
