@@ -53,7 +53,7 @@ const App = () => {
 
     noteService
       .update(id, changedNote)
-        .then(returnedNote => {
+      .then(returnedNote => {
         setNotes(notes.map(note => note.id !== id ? note : returnedNote))
       })
       .catch(error => {
@@ -122,9 +122,9 @@ const App = () => {
       <Notification message={errorMessage} />
 
       {user === null ?
-      loginForm() :
-      noteForm()
-    }
+        loginForm() :
+        noteForm()
+      }
 
       <div>
         <button onClick={() => setShowAll(!showAll)}>
