@@ -66,10 +66,6 @@ const App = () => {
       })
   }
 
-  const handleNoteChange = (event) => {
-    setNewNote(event.target.value)
-  }
-
   const handleLogin = async (event) => {
     event.preventDefault()
 
