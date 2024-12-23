@@ -15,10 +15,13 @@ const App = () => {
   const [toastMessage, setToastMessage] = useState("toast")
   const [errorMessage, setErrorMessage] = useState("error")
 
-  useEffect(() => {
-    blogService.getAll().then(blogs =>
-      setBlogs( blogs )
-    )
+  useEffect(async () => {
+    try {
+      const blogs = await blogService.getAll()
+      setBlogs(blogs)
+    } catch (error) {
+      console.error('Failed to fetch blogs:', error)
+    }
   }, [])
 
   useEffect(() => {
@@ -116,7 +119,7 @@ const App = () => {
     </>
   )
 
-  const addBlog = (event) => {
+  const addBlog = async (event) => {
     event.preventDefault()
     const blogObject = {
       title: newTitle,
@@ -124,14 +127,15 @@ const App = () => {
       url: newUrl,
     }
 
-    blogService
-      .create(blogObject)
-        .then(returnedBlog => {
-        setBlogs(blogs.concat(returnedBlog))
-        setNewAuthor('')
-        setNewTitle('')
-        setNewUrl('')
-      })
+    try {
+      const returnedBlog = await blogService.create(blogObject)
+      setBlogs(blogs.concat(returnedBlog))
+      setNewAuthor('')
+      setNewTitle('')
+      setNewUrl('')
+    } catch (error) {
+      console.error('Failed to create blog:', error)
+    }
   }
 
   return (
