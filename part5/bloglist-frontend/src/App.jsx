@@ -107,11 +107,19 @@ const App = () => {
       </Togglable>
       <div>
         {blogs.map(blog =>
-          <Blog key={blog.id} blog={blog} />
+          <Blog key={blog.id} blog={blog} updateBlog={updateBlog} />
         )}
       </div>
     </div>
   )
+
+  const updateBlog = (id, blogObject) => {
+    try {
+      setBlogs(blogs.map(blog => blog.id === id ? blogObject : blog))
+    } catch (error) {
+      console.error('Failed to update blog:', error)
+    }
+  }
 
   const addBlog = async (blogObject) => {
     try {
