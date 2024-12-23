@@ -111,6 +111,7 @@ const App = () => {
     <div>
       <h2>blogs</h2>
       <Notification message={toastMessage} color="green" />
+      <Notification message={errorMessage} color="red" />
       <p>{user.name} logged in <button type="submit" onClick={() => handleLogout()}>logout</button></p>
       <h2>create new</h2>
       <form onSubmit={addBlog}>
