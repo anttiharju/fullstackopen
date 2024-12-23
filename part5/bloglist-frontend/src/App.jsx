@@ -102,7 +102,7 @@ const App = () => {
       <Notification message={toastMessage} color="green" />
       <Notification message={errorMessage} color="red" />
       <p>{user.name} logged in <button onClick={handleLogout}>logout</button></p>
-      <Togglable buttonLabel="new blog" ref={blogFormRef}>
+      <Togglable buttonLabel="create new blog" ref={blogFormRef}>
         <BlogForm createBlog={addBlog} />
       </Togglable>
       <div>
