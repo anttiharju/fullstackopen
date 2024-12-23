@@ -14,11 +14,20 @@ const App = () => {
   const [toastMessage, setToastMessage] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null)
 
+  function byLikes(b1, b2) {
+    if (b1.likes < b2.likes) {
+      return 1;
+    } else if (b1.likes > b2.likes) {
+      return -1;
+    }
+    return 0
+  }
+
   useEffect(() => {
     async function getBlogs() {
       try {
         const blogs = await blogService.getAll()
-        setBlogs(blogs)
+        setBlogs(blogs.sort(byLikes))
       } catch (error) {
         console.error('Failed to fetch blogs:', error)
       }
@@ -115,7 +124,7 @@ const App = () => {
 
   const updateBlog = (id, blogObject) => {
     try {
-      setBlogs(blogs.map(blog => blog.id === id ? blogObject : blog))
+      setBlogs(blogs.map(b => b.id === id ? blogObject : b).sort(byLikes))
     } catch (error) {
       console.error('Failed to update blog:', error)
     }
@@ -125,7 +134,7 @@ const App = () => {
     try {
       blogFormRef.current.toggleVisibility()
       const returnedBlog = await blogService.create(blogObject)
-      setBlogs(blogs.concat(returnedBlog))
+      setBlogs(blogs.concat(returnedBlog).sort(byLikes))
       setToastMessage(`a new blog ${blogObject.title} by ${blogObject.author} added`)
       setTimeout(() => {
         setToastMessage(null)
