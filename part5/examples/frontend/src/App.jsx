@@ -3,6 +3,8 @@ import Note from './components/Note'
 import Notification from './components/Notification'
 import LoginForm from './components/LoginForm'
 import Footer from './components/Footer'
+import Togglable from './components/Togglable'
+import NoteForm from './components/NoteForm'
 import noteService from './services/notes'
 import loginService from './services/login'
 
@@ -38,33 +40,17 @@ const App = () => {
     const showWhenVisible = { display: loginVisible ? '' : 'none' }
 
     return (
-      <div>
-        <div style={hideWhenVisible}>
-          <button onClick={() => setLoginVisible(true)}>log in</button>
-        </div>
-        <div style={showWhenVisible}>
-          <LoginForm
-            username={username}
-            password={password}
-            handleUsernameChange={({ target }) => setUsername(target.value)}
-            handlePasswordChange={({ target }) => setPassword(target.value)}
-            handleSubmit={handleLogin}
-          />
-          <button onClick={() => setLoginVisible(false)}>cancel</button>
-        </div>
-      </div>
+      <Togglable buttonLabel="log in">
+        <LoginForm
+          username={username}
+          password={password}
+          handleUsernameChange={({ target }) => setUsername(target.value)}
+          handlePasswordChange={({ target }) => setPassword(target.value)}
+          handleSubmit={handleLogin}
+        />
+      </Togglable>
     )
   }
-
-  const noteForm = () => (
-    <form onSubmit={addNote}>
-      <input
-        value={newNote}
-        onChange={handleNoteChange}
-      />
-      <button type="submit">save</button>
-    </form>
-  )
 
   const addNote = (event) => {
     event.preventDefault()
@@ -142,7 +128,13 @@ const App = () => {
       loginForm() :
       <div>
         <p>{user.name} logged-in</p>
-        {noteForm()}
+        <Togglable buttonLabel="new note">
+          <NoteForm
+            onSubmit={addNote}
+            value={newNote}
+            handleChange={handleNoteChange}
+          />
+        </Togglable>
       </div>
     }
 
