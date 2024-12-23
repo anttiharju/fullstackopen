@@ -12,8 +12,8 @@ const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
-  const [toastMessage, setToastMessage] = useState("toast")
-  const [errorMessage, setErrorMessage] = useState("error")
+  const [toastMessage, setToastMessage] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null)
 
   useEffect(async () => {
     try {
@@ -51,6 +51,13 @@ const App = () => {
       setPassword('')
     } catch (exception) {
       console.log(exception)
+
+      setErrorMessage(
+        `wrong username or password`
+      )
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
     }
   }
 
@@ -60,27 +67,31 @@ const App = () => {
   }
 
   const loginForm = () => (
-    <form onSubmit={handleLogin}>
-      <div>
-        username
-          <input
-          type="text"
-          value={username}
-          name="Username"
-          onChange={({ target }) => setUsername(target.value)}
-        />
-      </div>
-      <div>
-        password
-          <input
-          type="password"
-          value={password}
-          name="Password"
-          onChange={({ target }) => setPassword(target.value)}
-        />
-      </div>
-      <button type="submit">login</button>
-    </form>
+    <>
+      <h2>log in to application</h2>
+      <Notification message={errorMessage} color="red" />
+      <form onSubmit={handleLogin}>
+        <div>
+          username
+            <input
+            type="text"
+            value={username}
+            name="Username"
+            onChange={({ target }) => setUsername(target.value)}
+          />
+        </div>
+        <div>
+          password
+            <input
+            type="password"
+            value={password}
+            name="Password"
+            onChange={({ target }) => setPassword(target.value)}
+          />
+        </div>
+        <button type="submit">login</button>
+      </form>
+    </>
   )
 
   const handleTitleChange = (event) => {
