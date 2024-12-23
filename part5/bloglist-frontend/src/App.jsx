@@ -15,13 +15,16 @@ const App = () => {
   const [toastMessage, setToastMessage] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null)
 
-  useEffect(async () => {
-    try {
-      const blogs = await blogService.getAll()
-      setBlogs(blogs)
-    } catch (error) {
-      console.error('Failed to fetch blogs:', error)
+  useEffect(() => {
+    async function getBlogs() {
+      try {
+        const blogs = await blogService.getAll()
+        setBlogs(blogs)
+      } catch (error) {
+        console.error('Failed to fetch blogs:', error)
+      }
     }
+    getBlogs();
   }, [])
 
   useEffect(() => {
