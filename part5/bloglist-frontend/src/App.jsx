@@ -42,8 +42,12 @@ const App = () => {
       setPassword('')
     } catch (exception) {
       console.log(exception)
-      console.log('Wrong credentials')
     }
+  }
+
+  const handleLogout = async () => {
+    window.localStorage.removeItem('loggedBlogappUser')
+    window.location.reload();
   }
 
   const loginForm = () => (
@@ -83,7 +87,7 @@ const App = () => {
     user === null ?
     loginForm() :
     <div>
-      <p>{user.name} logged-in</p>
+      <p>{user.name} logged in <button type="submit" onClick={() => handleLogout()}>logout</button></p>
       {blogList()}
     </div>
   )
