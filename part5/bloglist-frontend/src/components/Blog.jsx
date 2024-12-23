@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import blogService from '../services/blogs'
 
-const Blog = ({ blog, updateBlog, username }) => {
+const Blog = ({ blog, updateBlog, username, removeBlog }) => {
   const [visible, setVisible] = useState(false)
 
   const hideWhenVisible = { display: visible ? 'none' : '' }
@@ -28,6 +28,15 @@ const Blog = ({ blog, updateBlog, username }) => {
     }
   }
 
+  const remove = async (id) => {
+    try {
+      const blog = await blogService.remove(id)
+      removeBlog(id, blog)
+    } catch (error) {
+      console.error('Failed to remove blog', error)
+    }
+  }
+
   return (
     <div style={blogStyle}>
       <div style={hideWhenVisible}>
@@ -41,7 +50,7 @@ const Blog = ({ blog, updateBlog, username }) => {
         likes {blog.likes} <button onClick={() => like(blog.id, blog.likes)}>like</button><br />
         {blog.user.name} <br />
         {blog.user.username == username &&
-        <button>remove</button>
+        <button onClick={() => remove(blog.id)}>remove</button>
         }
       </div>
     </div>

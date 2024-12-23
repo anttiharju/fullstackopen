@@ -116,7 +116,7 @@ const App = () => {
       </Togglable>
       <div>
         {blogs.map(blog =>
-          <Blog key={blog.id} blog={blog} updateBlog={updateBlog} username={user.username} />
+          <Blog key={blog.id} blog={blog} updateBlog={updateBlog} username={user.username} removeBlog={removeBlog}/>
         )}
       </div>
     </div>
@@ -127,6 +127,14 @@ const App = () => {
       setBlogs(blogs.map(b => b.id === id ? blogObject : b).sort(byLikes))
     } catch (error) {
       console.error('Failed to update blog:', error)
+    }
+  }
+
+  const removeBlog = (id) => {
+    try {
+      setBlogs(blogs.filter(b => b.id !== id))
+    } catch (error) {
+      console.error('Failed to remove blog:', error)
     }
   }
 
