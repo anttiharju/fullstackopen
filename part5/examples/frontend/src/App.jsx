@@ -9,9 +9,7 @@ import noteService from './services/notes'
 import loginService from './services/login'
 
 const App = () => {
-  const [loginVisible, setLoginVisible] = useState(false)
   const [notes, setNotes] = useState([])
-  const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true)
   const [errorMessage, setErrorMessage] = useState(null)
   const [username, setUsername] = useState('')
@@ -36,9 +34,6 @@ const App = () => {
   }, [])
 
   const loginForm = () => {
-    const hideWhenVisible = { display: loginVisible ? 'none' : '' }
-    const showWhenVisible = { display: loginVisible ? '' : 'none' }
-
     return (
       <Togglable buttonLabel="log in">
         <LoginForm
@@ -50,21 +45,6 @@ const App = () => {
         />
       </Togglable>
     )
-  }
-
-  const addNote = (event) => {
-    event.preventDefault()
-    const noteObject = {
-      content: newNote,
-      important: Math.random() > 0.5,
-    }
-
-    noteService
-      .create(noteObject)
-        .then(returnedNote => {
-        setNotes(notes.concat(returnedNote))
-        setNewNote('')
-      })
   }
 
   const toggleImportanceOf = id => {
@@ -118,6 +98,20 @@ const App = () => {
     ? notes
     : notes.filter(note => note.important)
 
+  const addNote = (noteObject) => {
+    noteService
+      .create(noteObject)
+      .then(returnedNote => {
+        setNotes(notes.concat(returnedNote))
+      })
+  }
+
+  const noteForm = () => (
+    <Togglable buttonLabel='new note'>
+      <NoteForm createNote={addNote} />
+    </Togglable>
+  )
+
   return (
     <div>
       <h1>Notes</h1>
@@ -126,16 +120,7 @@ const App = () => {
 
       {user === null ?
       loginForm() :
-      <div>
-        <p>{user.name} logged-in</p>
-        <Togglable buttonLabel="new note">
-          <NoteForm
-            onSubmit={addNote}
-            value={newNote}
-            handleChange={handleNoteChange}
-          />
-        </Togglable>
-      </div>
+      noteForm()
     }
 
       <div>
