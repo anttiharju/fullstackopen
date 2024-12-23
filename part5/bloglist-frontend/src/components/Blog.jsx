@@ -28,10 +28,12 @@ const Blog = ({ blog, updateBlog, username, removeBlog }) => {
     }
   }
 
-  const remove = async (id) => {
+  const remove = async (blog) => {
     try {
-      const blog = await blogService.remove(id)
-      removeBlog(id, blog)
+      if (window.confirm(`Remove blog ${blog.title} by ${blog.author}`)) {
+        const removedBlog = await blogService.remove(blog.id)
+        removeBlog(blog.id, removedBlog)
+      }
     } catch (error) {
       console.error('Failed to remove blog', error)
     }
@@ -50,7 +52,7 @@ const Blog = ({ blog, updateBlog, username, removeBlog }) => {
         likes {blog.likes} <button onClick={() => like(blog.id, blog.likes)}>like</button><br />
         {blog.user.name} <br />
         {blog.user.username == username &&
-        <button onClick={() => remove(blog.id)}>remove</button>
+        <button onClick={() => remove(blog)}>remove</button>
         }
       </div>
     </div>
