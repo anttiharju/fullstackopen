@@ -147,6 +147,12 @@ const App = () => {
     try {
       const returnedBlog = await blogService.create(blogObject)
       setBlogs(blogs.concat(returnedBlog))
+      setToastMessage(
+        `a new blog ${newTitle} by ${newAuthor} added`
+      )
+      setTimeout(() => {
+        setToastMessage(null)
+      }, 5000)
       setNewAuthor('')
       setNewTitle('')
       setNewUrl('')
