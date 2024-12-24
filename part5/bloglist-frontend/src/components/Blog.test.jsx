@@ -2,7 +2,9 @@ import { render, screen } from '@testing-library/react'
 import Blog from './Blog'
 import userEvent from '@testing-library/user-event'
 
-test('renders title and author but not url or likes', () => {
+describe('<Blog />', () => {
+  let container
+
   const blog = {
     title: 'Learn Go with Tests',
     author: 'Chris James',
@@ -11,41 +13,6 @@ test('renders title and author but not url or likes', () => {
     user: {
       name: 'Chris James',
       username: 'quii'
-    }
-  }
-
-  // Silence PropType warnings
-  const dummyUpdateBlog = () => {}
-  const dummyLoggedInUserUsername = 'quii' // misleading to reuse blog.user.username
-  const dummyRemoveBlog = () => {}
-
-  const { container } = render(
-    <Blog
-      blog={blog}
-      updateBlog={dummyUpdateBlog}
-      username={dummyLoggedInUserUsername}
-      removeBlog={dummyRemoveBlog}
-    />
-  )
-
-  const div = container.querySelector('.blog')
-  expect(div).toHaveTextContent(blog.title)
-  expect(div).toHaveTextContent(blog.author)
-  expect(div).not.toHaveTextContent(blog.url)
-  expect(div).not.toHaveTextContent(`likes ${blog.likes}`)
-})
-
-describe('when interacting', () => {
-  let container
-
-  const blog = {
-    title: 'Kubernetes The Hard Way',
-    author: 'Kelsey Hightower',
-    url: 'https://github.com/kelseyhightower/kubernetes-the-hard-way',
-    likes: 240,
-    user: {
-      name: 'Kelsey Hightower',
-      username: 'kelseyhightower'
     }
   }
 
@@ -64,7 +31,16 @@ describe('when interacting', () => {
       />
     ).container
   })
-  test('renders url and likes when blog is shown', async () => {
+
+  test('by default renders title and author but not url or likes', () => {
+    const div = container.querySelector('.blog')
+    expect(div).toHaveTextContent(blog.title)
+    expect(div).toHaveTextContent(blog.author)
+    expect(div).not.toHaveTextContent(blog.url)
+    expect(div).not.toHaveTextContent(`likes ${blog.likes}`)
+  })
+
+  test('clicking view renders url and likes', async () => {
     const user = userEvent.setup()
     const button = screen.getByText('view')
     await user.click(button)
