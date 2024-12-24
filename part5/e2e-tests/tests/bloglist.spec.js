@@ -1,16 +1,10 @@
 const { test, expect, beforeEach, describe } = require('@playwright/test')
-const { loginWith, createBlog, getLikes } = require('./helper')
+const { loginWith, createBlog, getLikes, createUser } = require('./helper')
 
 describe('Blog app', () => {
   beforeEach(async ({ page, request }) => {
     await request.post('/api/testing/reset')
-    await request.post('/api/users', {
-      data: {
-        name: 'Antti Harju',
-        username: 'anttiharju',
-        password: 'salainen'
-      }
-    })
+    await createUser(request, 'Antti Harju', 'anttiharju', 'salainen')
 
     await page.goto('/')
   })

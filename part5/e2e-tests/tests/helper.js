@@ -18,4 +18,14 @@ const getLikes = async (page) => {
   return parseInt(likesText.split(' ')[N])
 }
 
-export { loginWith, createBlog, getLikes }
+const createUser = async (request, name, username, password) => {
+  await request.post('/api/users', {
+    data: {
+      name: name,
+      username: username,
+      password: password
+    }
+  })
+}
+
+export { loginWith, createBlog, getLikes, createUser }
