@@ -8,6 +8,15 @@ const anecdotesAtStart = [
   'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.'
 ]
 
+function byVotes(a1, a2) {
+  if (a1.votes < a2.votes) {
+    return 1
+  } else if (a1.votes > a2.votes) {
+    return -1
+  }
+  return 0
+}
+
 const getId = () => (100000 * Math.random()).toFixed(0)
 
 const asObject = (anecdote) => {
@@ -26,7 +35,7 @@ const reducer = (state = initialState, action) => {
 
   switch(action.type) {
     case 'NEW_ANECDOTE':
-      return [...state, action.payload]
+      return [...state, action.payload].sort(byVotes)
     case 'VOTE':
       const id = action.payload.id
       const voteToChange = state.find(v => v.id === id)
@@ -36,7 +45,7 @@ const reducer = (state = initialState, action) => {
       }
       return state.map(anecdote =>
         anecdote.id !== id ? anecdote : changedVote
-      )
+      ).sort(byVotes)
     default:
       return state
     }
