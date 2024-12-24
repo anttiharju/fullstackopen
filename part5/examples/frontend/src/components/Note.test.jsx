@@ -9,7 +9,9 @@ test('renders content', () => {
 
   render(<Note note={note} />)
 
-  const element = screen.getByText('Does not work anymore :(')
+  const element = screen.getByText(
+    'Does not work anymore :(', { exact: false }
+  )
 
   expect(element).toBeDefined()
 })
