@@ -1,9 +1,26 @@
-const { test, expect } = require('@playwright/test')
+const { test, describe, expect, beforeEach } = require('@playwright/test')
 
-test('front page can be opened', async ({ page }) => {
-  await page.goto('http://localhost:5173')
+describe('Note app', () => {
+  beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:5173')
+  })
 
-  const locator = await page.getByText('Notes')
-  await expect(locator).toBeVisible()
-  await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2024')).toBeVisible()
+  test('front page can be opened', async ({ page }) => {
+    await page.goto('http://localhost:5173')
+
+    const locator = await page.getByText('Notes')
+    await expect(locator).toBeVisible()
+    await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2024')).toBeVisible()
+  })
+
+  test('login form can be opened', async ({ page }) => {
+    await page.goto('http://localhost:5173')
+
+    await page.getByRole('button', { name: 'log in' }).click()
+    await page.getByTestId('username').fill('mluukkai')
+    await page.getByTestId('password').fill('salainen')
+    await page.getByRole('button', { name: 'login' }).click()
+
+    await expect(page.getByText('Your awesome note')).toBeVisible() // 'Matti Luukkainen logged in' not implemented, inconsistency?
+  })
 })
