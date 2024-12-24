@@ -105,39 +105,6 @@ const App = () => {
     </>
   )
 
-  const blogForm = () => (
-    <div>
-      <h2>blogs</h2>
-      <Notification message={toastMessage} color="green" />
-      <Notification message={errorMessage} color="red" />
-      <p>{user.name} logged in <button onClick={handleLogout}>logout</button></p>
-      <Togglable buttonLabel="create new blog" ref={blogFormRef}>
-        <BlogForm createBlog={addBlog} />
-      </Togglable>
-      <div>
-        {blogs.map(blog =>
-          <Blog key={blog.id} blog={blog} updateBlog={updateBlog} username={user.username} removeBlog={removeBlog}/>
-        )}
-      </div>
-    </div>
-  )
-
-  const updateBlog = (id, blogObject) => {
-    try {
-      setBlogs(blogs.map(b => b.id === id ? blogObject : b).sort(byLikes))
-    } catch (error) {
-      console.error('Failed to update blog:', error)
-    }
-  }
-
-  const removeBlog = (id) => {
-    try {
-      setBlogs(blogs.filter(b => b.id !== id))
-    } catch (error) {
-      console.error('Failed to remove blog:', error)
-    }
-  }
-
   const addBlog = async (blogObject) => {
     try {
       blogFormRef.current.toggleVisibility()
@@ -152,6 +119,49 @@ const App = () => {
     }
   }
   const blogFormRef = useRef()
+
+  const likeBlog = async (id, likes) => {
+    try {
+      const blogObject = await blogService.like(id, likes)
+      setBlogs(blogs.map(b => b.id === id ? blogObject : b).sort(byLikes))
+    } catch (error) {
+      console.error('Failed to like blog', error)
+    }
+  }
+
+  const removeBlog = async (blog) => {
+    try {
+      if (window.confirm(`Remove blog ${blog.title} by ${blog.author}`)) {
+        await blogService.remove(blog.id)
+        setBlogs(blogs.filter(b => b.id !== blog.id))
+      }
+    } catch (error) {
+      console.error('Failed to remove blog', error)
+    }
+  }
+
+  const blogForm = () => (
+    <div>
+      <h2>blogs</h2>
+      <Notification message={toastMessage} color="green" />
+      <Notification message={errorMessage} color="red" />
+      <p>{user.name} logged in <button onClick={handleLogout}>logout</button></p>
+      <Togglable buttonLabel="create new blog" ref={blogFormRef}>
+        <BlogForm createBlog={addBlog} />
+      </Togglable>
+      <div>
+        {blogs.map(blog =>
+          <Blog
+            key={blog.id}
+            blog={blog}
+            username={user.username}
+            likeBlog={likeBlog}
+            removeBlog={removeBlog}
+          />
+        )}
+      </div>
+    </div>
+  )
 
   return (
     user === null ?

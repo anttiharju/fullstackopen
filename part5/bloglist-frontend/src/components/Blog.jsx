@@ -1,9 +1,8 @@
 import PropTypes from 'prop-types'
 
 import { useState } from 'react'
-import blogService from '../services/blogs'
 
-const Blog = ({ blog, updateBlog, username, removeBlog }) => {
+const Blog = ({ blog, username, likeBlog, removeBlog }) => {
   const [visible, setVisible] = useState(false)
 
   const hideWhenVisible = { display: visible ? 'none' : '' }
@@ -21,26 +20,6 @@ const Blog = ({ blog, updateBlog, username, removeBlog }) => {
     marginBottom: 5
   }
 
-  const like = async (id, likes) => {
-    try {
-      const blog = await blogService.like(id, likes)
-      updateBlog(id, blog)
-    } catch (error) {
-      console.error('Failed to update blog', error)
-    }
-  }
-
-  const remove = async (blog) => {
-    try {
-      if (window.confirm(`Remove blog ${blog.title} by ${blog.author}`)) {
-        const removedBlog = await blogService.remove(blog.id)
-        removeBlog(blog.id, removedBlog)
-      }
-    } catch (error) {
-      console.error('Failed to remove blog', error)
-    }
-  }
-
   return (
     <div style={blogStyle}>
       <div style={hideWhenVisible} className='blog'>
@@ -51,10 +30,10 @@ const Blog = ({ blog, updateBlog, username, removeBlog }) => {
         {blog.title} {blog.author}
         <button onClick={toggleVisibility}>hide</button><br />
         {blog.url} <br />
-        likes {blog.likes} <button onClick={() => like(blog.id, blog.likes)}>like</button><br />
+        likes {blog.likes} <button onClick={() => likeBlog(blog.id, blog.likes)}>like</button><br />
         {blog.user.name} <br />
         {blog.user.username === username &&
-        <button onClick={() => remove(blog)}>remove</button>
+        <button onClick={() => removeBlog(blog)}>remove</button>
         }
       </div>
     </div>
@@ -63,8 +42,8 @@ const Blog = ({ blog, updateBlog, username, removeBlog }) => {
 
 Blog.propTypes = {
   blog: PropTypes.object.isRequired,
-  updateBlog: PropTypes.func.isRequired,
   username: PropTypes.string.isRequired,
+  likeBlog: PropTypes.func.isRequired,
   removeBlog: PropTypes.func.isRequired
 }
 
