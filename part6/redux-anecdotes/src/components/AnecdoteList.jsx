@@ -21,13 +21,12 @@ Anecdote.propTypes = {
   handleClick: PropTypes.func.isRequired,
 }
 
-const Anecdotes = () => {
+const AnecdoteList = () => {
   const dispatch = useDispatch()
   const anecdotes = useSelector(state => state)
 
   return(
     <>
-      <h2>Anecdotes</h2>
       {anecdotes.map(anecdote =>
         <Anecdote
         key={anecdote.id}
@@ -40,4 +39,4 @@ const Anecdotes = () => {
   )
 }
 
-export default Anecdotes
+export default AnecdoteList
