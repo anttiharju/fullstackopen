@@ -18,16 +18,16 @@ describe('<Blog />', () => {
     }
 
     // Silence PropType warnings
-    const dummyUpdateBlog = () => {}
     const dummyLoggedInUserUsername = 'kelseyhightower' // misleading to reuse blog.user.username
+    const dummyLikeBlog = () => {}
     const dummyRemoveBlog = () => {}
 
     beforeEach(() => {
       container = render(
         <Blog
           blog={blog}
-          updateBlog={dummyUpdateBlog}
           username={dummyLoggedInUserUsername}
+          likeBlog={dummyLikeBlog}
           removeBlog={dummyRemoveBlog}
         />
       ).container
