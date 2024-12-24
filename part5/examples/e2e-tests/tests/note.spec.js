@@ -15,10 +15,7 @@ describe('Note app', () => {
   })
 
   test('login fails with wrong password', async ({ page }) => {
-    await page.getByRole('button', { name: 'log in' }).click()
-    await page.getByTestId('username').fill('mluukkai')
-    await page.getByTestId('password').fill('wrong')
-    await page.getByRole('button', { name: 'login' }).click()
+    await loginWith(page, 'mluukkai', 'wrong')
 
     const errorDiv = await page.locator('.error')
     await expect(errorDiv).toContainText('wrong credentials')
@@ -35,10 +32,7 @@ describe('Note app', () => {
   })
 
   test('login form can be opened', async ({ page }) => {
-    await page.getByRole('button', { name: 'log in' }).click()
-    await page.getByTestId('username').fill('mluukkai')
-    await page.getByTestId('password').fill('salainen')
-    await page.getByRole('button', { name: 'login' }).click()
+    await loginWith(page, 'mluukkai', 'salainen')
 
     await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
   })
