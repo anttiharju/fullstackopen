@@ -85,5 +85,45 @@ describe('Blog app', () => {
         await expect(page.getByRole('button', { name: 'remove' })).not.toBeVisible()
       })
     })
+
+    // I don't think this kind of testing should be done through Playwright.
+    // There's probably a more idiomatic way but this is fine.
+    describe('and several blogs exist', () => {
+      const likes = [1, 0, 3]
+      beforeEach(async ({ page }) => {
+        // Create as many blogs as there are items in the likes array
+        for (let i = 0; i < likes.length; i++) {
+          const n = i + 1
+          await createBlog(page, `Blog #${n}`, `Author #${n}`, `Website #${n}`, true)
+        }
+
+        // Like the blogs according to the array
+        for (let i = 0; i < likes.length; i++) {
+          await page.getByRole('button', { name: 'view' }).nth(i).click()
+          for (let j = 0; j < likes[i]; j++) {
+            await page.getByRole('button', { name: 'like' }).click()
+            await expect(page.getByText(`likes ${j + 1}`).last()).toBeVisible()
+          }
+          await page.getByRole('button', { name: 'hide' }).nth(0).click()
+        }
+
+        // Leave all blogs (specifically their likes) visible
+        for (let i = 0; i < likes.length; i++) {
+          await page.getByRole('button', { name: 'view' }).nth(0).click()
+        }
+
+        // I tried extracting the three above into functions; it
+        // didn't work on first attempt and I can't be bothered.
+      })
+
+      test('they are sorted by likes', async ({ page }) => {
+        let previousLikes = await getLikes(page, 0)
+        for (let i = 1; i < likes.length; i++) {
+          const currentLikes = await getLikes(page, i)
+          expect(currentLikes).toBeLessThanOrEqual(previousLikes)
+          previousLikes = currentLikes
+        }
+      })
+    })
   })
 })
