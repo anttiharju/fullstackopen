@@ -3,14 +3,14 @@ import Note from './Note'
 
 test('renders content', () => {
   const note = {
-    content: 'Does not work anymore :(',
+    content: 'Works again :)',
     important: true
   }
 
   render(<Note note={note} />)
 
   const element = screen.getByText(
-    'Does not work anymore :(', { exact: false }
+    'Works again :)', { exact: false }
   )
 
   expect(element).toBeDefined()
