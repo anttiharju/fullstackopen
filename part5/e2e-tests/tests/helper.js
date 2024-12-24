@@ -12,4 +12,10 @@ const createBlog = async (page, title, author, url) => {
   await page.getByRole('button', { name: 'create' }).click()
 }
 
-export { loginWith, createBlog }
+const getLikes = async (page) => {
+  const likesText = await page.locator('.likes').textContent()
+  const N = 1 // format: "likes N"
+  return parseInt(likesText.split(' ')[N])
+}
+
+export { loginWith, createBlog, getLikes }
