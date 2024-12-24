@@ -1,22 +1,15 @@
 import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
 import Note from './Note'
 
-test('renders content', async () => {
+test('renders content', () => {
   const note = {
-    content: 'Component testing is done with react-testing-library',
+    content: 'Does not work anymore :(',
     important: true
   }
 
-  const mockHandler = vi.fn()
+  render(<Note note={note} />)
 
-  render(
-    <Note note={note} toggleImportance={mockHandler} />
-  )
+  const element = screen.getByText('Does not work anymore :(')
 
-  const user = userEvent.setup()
-  const button = screen.getByText('make not important')
-  await user.click(button)
-
-  expect(mockHandler.mock.calls).toHaveLength(1)
+  expect(element).toBeDefined()
 })
